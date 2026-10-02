@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Radar — каталог і пошук AI-сайтів</title>
+<meta name="description" content="Каталог AI-сервісів на живих даних FreeSerp: пошук за описом, фільтри за нішею, авторитетом домену й датою, новинки та порівняння сайтів поруч.">
+<link rel="canonical" href="https://yuliya-mykh.github.io/AI-Radar/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Radar">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:url" content="https://yuliya-mykh.github.io/AI-Radar/">
+<meta property="og:title" content="AI Radar — каталог і пошук AI-сайтів">
+<meta property="og:description" content="Каталог AI-сервісів на живих даних FreeSerp: пошук за описом, фільтри за нішею, авторитетом домену й датою, новинки та порівняння сайтів поруч.">
+<meta property="og:image" content="https://yuliya-mykh.github.io/AI-Radar/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AI Radar — знайдіть AI-сервіс під своє завдання">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Radar — каталог і пошук AI-сайтів">
+<meta name="twitter:description" content="Каталог AI-сервісів на живих даних FreeSerp: пошук за описом, фільтри за нішею, авторитетом домену й датою, новинки та порівняння сайтів поруч.">
+<meta name="twitter:image" content="https://yuliya-mykh.github.io/AI-Radar/assets/og.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AI Radar",
+  "url": "https://yuliya-mykh.github.io/AI-Radar/",
+  "description": "Каталог AI-сервісів на живих даних FreeSerp: пошук за описом, фільтри за нішею, авторитетом домену й датою, новинки та порівняння сайтів поруч.",
+  "inLanguage": "uk"
+}
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23a44fc9'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M16 16 23 9' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#fdf1f3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">До вмісту</a>
+<noscript><p style="padding:16px;text-align:center">AI Radar — каталог AI-сайтів на даних FreeSerp: пошук, фільтри, новинки та порівняння. Для роботи каталогу увімкніть JavaScript.</p></noscript>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="logo" href="#/catalog" aria-label="AI Radar — на головну">
+      <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a44fc9"/><stop offset="1" stop-color="#4fb394"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><circle cx="16" cy="16" r="9" fill="none" stroke="#fff" stroke-width="2"/><path d="M16 16 23 9" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="16" r="2" fill="#fff"/></svg>
+      <span>AI Radar</span>
+    </a>
+    <button type="button" class="burger" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Меню">
+      <span></span><span></span><span></span>
+      <i class="burger__dot" id="burgerDot" hidden></i>
+    </button>
+    <nav class="nav" id="siteNav" aria-label="Основна навігація">
+      <a href="#/catalog" data-nav="catalog">Каталог</a>
+      <a href="#/new" data-nav="new">Новинки</a>
+      <a href="#/compare" data-nav="compare">Порівняння <span class="badge" id="cmpCount" hidden>0</span></a>
+      <a href="#/about" data-nav="about">Про проєкт</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <!-- ============ КАТАЛОГ ============ -->
+  <section id="view-catalog" class="view" hidden>
+    <div class="hero hero--main">
+      <div class="hero__top">
+        <h1>Знайдіть <span class="grad">AI-сервіс</span><br>під своє завдання</h1>
+        <div class="hero__art" aria-hidden="true"></div>
+      </div>
+      <dl class="stats" id="stats" aria-label="Статистика індексу"></dl>
+    </div>
+
+    <div class="layout">
+      <aside class="filters" aria-label="Фільтри">
+        <div class="filters__box">
+          <form id="searchForm" class="field fsearch-field" role="search">
+            <label for="fq">Пошук</label>
+            <div class="fsearch">
+              <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m14 14 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <input id="fq" type="search" name="q" placeholder="Пошук…" autocomplete="off" enterkeyhint="search">
+            </div>
+          </form>
+          <button type="button" class="btn filters__open" id="filtersOpen" aria-haspopup="dialog" aria-controls="filtersBox">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 5h14M6 10h8M8.5 15h3"/></svg>
+            Фільтри <span class="badge js-fcount" hidden></span>
+          </button>
+
+          <details class="filters__more" id="filtersBox" open aria-label="Фільтри">
+          <summary>Фільтри <span class="badge js-fcount" hidden></span></summary>
+          <div class="sheet__head">
+            <strong>Фільтри <span class="badge js-fcount" hidden></span></strong>
+            <button type="button" class="dialog__close sheet__close" id="filtersClose" aria-label="Закрити фільтри">×</button>
+          </div>
+
+          <div class="field">
+            <label for="fSort">Сортування</label>
+            <select id="fSort">
+              <option value="dr">За авторитетом (DR)</option>
+              <option value="rel">За релевантністю</option>
+              <option value="new">Спочатку новіші</option>
+              <option value="az">За доменом A–Z</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="fDr">Мінімальний DR: <output id="fDrOut">0</output></label>
+            <input id="fDr" type="range" min="0" max="90" step="5" value="0">
+          </div>
+
+          <div class="field">
+            <label for="fDays">Зʼявився в індексі</label>
+            <select id="fDays">
+              <option value="">Будь-коли</option>
+              <option value="7">За 7 днів</option>
+              <option value="30">За 30 днів</option>
+              <option value="90">За 90 днів</option>
+              <option value="365">За рік</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="fTld">Доменна зона</label>
+            <select id="fTld"><option value="">Усі</option></select>
+          </div>
+
+          <div class="field field--check">
+            <input id="fStrict" type="checkbox" checked>
+            <label for="fStrict">Лише справжні AI-продукти <small>без магазинів, каталогів і шуму</small></label>
+          </div>
+
+          <div class="field">
+            <span class="field__label" id="catLabel">Ніша</span>
+            <ul class="cats" id="cats" aria-labelledby="catLabel"></ul>
+          </div>
+
+          <div class="sheet__foot">
+            <button type="button" class="btn btn--ghost btn--block" id="resetBtn">Скинути<span class="hide-m">&nbsp;фільтри</span></button>
+            <button type="button" class="btn btn--primary btn--block sheet__apply" id="filtersApply">Показати результати</button>
+          </div>
+          </details>
+        </div>
+      </aside>
+
+      <div class="results">
+        <div class="results__bar">
+          <p id="resultInfo" aria-live="polite"></p>
+        </div>
+        <div id="grid" class="grid"></div>
+        <nav id="pager" class="pager" aria-label="Сторінки"></nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ НОВИНКИ ============ -->
+  <section id="view-new" class="view" hidden>
+    <div class="hero hero--small">
+      <div class="hero__top hero__top--sm">
+        <h1><span class="grad">Новинки</span><br>AI-сайтів</h1>
+        <div class="hero__art hero__art--new" aria-hidden="true"></div>
+      </div>
+      <p class="lead">AI-сайти, які FreeSerp щойно підтвердив як живі. Дата — це перша перевірка доступності, а не обовʼязково офіційний запуск.</p>
+      <div class="chips" id="newPeriod" role="group" aria-label="Період">
+        <button type="button" data-days="">Останні додані</button>
+        <button type="button" data-days="7">7 днів</button>
+        <button type="button" data-days="30">30 днів</button>
+        <button type="button" data-days="90">90 днів</button>
+      </div>
+    </div>
+    <p id="newInfo" class="muted" aria-live="polite"></p>
+    <div id="newList"></div>
+    <div class="center"><button type="button" class="btn" id="newMore" hidden>Показати ще</button></div>
+  </section>
+
+  <!-- ============ ПОРІВНЯННЯ ============ -->
+  <section id="view-compare" class="view" hidden>
+    <div class="hero hero--small">
+      <div class="hero__top hero__top--sm">
+        <h1>Порівняння<br><span class="grad">сайтів</span></h1>
+        <div class="hero__art hero__art--compare" aria-hidden="true"></div>
+      </div>
+      <p class="lead">До чотирьох сайтів поруч. Додавайте з каталогу кнопкою «Порівняти» або за доменом нижче.</p>
+      <form id="cmpForm" class="search search--narrow">
+        <label class="sr" for="cmpDomain">Домен</label>
+        <input id="cmpDomain" type="text" placeholder="example.ai" autocomplete="off" spellcheck="false">
+        <button type="submit" class="btn btn--primary">Додати</button>
+      </form>
+      <p id="cmpMsg" class="muted" aria-live="polite"></p>
+    </div>
+    <div id="cmpBody"></div>
+  </section>
+
+  <!-- ============ ПРО ПРОЄКТ ============ -->
+  <section id="view-about" class="view prose" hidden>
+    <div class="hero__top hero__top--sm">
+      <h1>Про <span class="grad">проєкт</span></h1>
+      <div class="hero__art hero__art--about" aria-hidden="true"></div>
+    </div>
+    <p class="lead">AI Radar — невеликий каталог AI-сайтів без бекенду: сторінка в браузері напряму звертається до публічного API <a href="https://freeserp.ai/docs.php" target="_blank" rel="noopener">freeserp.ai</a> (index=sites, ніша AI).</p>
+
+    <div class="about__grid">
+      <section class="about__card">
+      <h2>Мета</h2>
+      <p>Допомогти швидко знайти AI-сервіс під конкретне завдання, оцінити його за обʼєктивними сигналами (авторитет домену, ніша, давність в індексі) і порівняти кілька варіантів поруч.</p>
+      </section>
+      <section class="about__card">
+      <h2>Аудиторія</h2>
+      <ul>
+        <li><strong>Маркетологи та SEO-фахівці</strong> — шукають інструменти й майданчики в ніші, дивляться DR.</li>
+        <li><strong>Засновники й продакт-менеджери</strong> — вивчають конкурентів і нові продукти у своїй категорії.</li>
+        <li><strong>Розробники та ентузіасти</strong> — стежать за новинками й добирають інструменти.</li>
+      </ul>
+      </section>
+      <section class="about__card about__card--wide">
+      <h2>Сторінки</h2>
+      <table>
+        <thead><tr><th>Сторінка</th><th>Що робить</th><th>Запит до API</th></tr></thead>
+        <tbody>
+          <tr><td>Каталог</td><td>Пошук, фільтри (ніша, DR, дата, зона), сортування, пагінація, картка сайту</td><td><code>category=ai&amp;ai_startups=1&amp;q=…&amp;ai_categories=…&amp;dr_min=…</code></td></tr>
+          <tr><td>Новинки</td><td>Стрічка за датою появи в індексі, згрупована по днях</td><td><code>sort=went_live&amp;order=desc&amp;from_date=…</code></td></tr>
+          <tr><td>Порівняння</td><td>До 4 сайтів у таблиці, посилання для поширення</td><td><code>q=домен&amp;all=1</code></td></tr>
+          <tr><td>Про проєкт</td><td>План сайту та обмеження даних</td><td>—</td></tr>
+        </tbody>
+      </table>
+      </section>
+      <section class="about__card">
+      <h2>Структура</h2>
+      <p>Один HTML-файл, чотири екрани з маршрутами в адресі (<code>#/catalog</code>, <code>#/new</code>, <code>#/compare</code>, <code>#/about</code>). Стан фільтрів зберігається в адресі, тож будь-яку добірку можна надіслати посиланням. Список порівняння зберігається в браузері.</p>
+      </section>
+      <section class="about__card">
+      <h2>Що варто знати про дані</h2>
+      <ul>
+        <li>Описи сайтів згенеровані мовною моделлю на боці FreeSerp і можуть бути неточними.</li>
+        <li>DR — оцінка авторитету домену від 0 до 100, а не якість продукту.</li>
+        <li>«Зʼявився в індексі» — дата, коли сайт уперше підтверджено живим, а не дата запуску.</li>
+        <li>API віддає щонайбільше 10 000 результатів на запит, тому глибокі сторінки недоступні — звужуйте фільтри.</li>
+      </ul>
+      </section>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">Дані: <a href="https://freeserp.ai" target="_blank" rel="noopener">FreeSerp</a>, публічний API без ключа. Тестовий проєкт.</div>
+</footer>
+
+<div class="backdrop" id="backdrop" hidden></div>
+<dialog id="detail" class="dialog" aria-labelledby="detailTitle"></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
