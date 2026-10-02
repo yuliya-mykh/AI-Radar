@@ -156,6 +156,16 @@ button, input, select { font: inherit; color: inherit; }
 
 .results__bar { min-height: 28px; margin-bottom: 14px; color: var(--muted); font-size: .92rem; }
 .results__bar strong { color: var(--text); font-family: var(--mono); font-weight: 600; }
+/* Плашки вибраних фільтрів */
+.fchips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -4px 0 16px; }
+.fchip { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; padding: 6px 8px 6px 12px; border-radius: 999px; border: 1px solid rgba(164, 79, 201, .35); background: var(--orchid-soft); color: #5d2380; font-size: .85rem; font-weight: 600; cursor: pointer; transition: background .15s, border-color .15s; }
+.fchip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fchip i { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(164, 79, 201, .18); font-style: normal; font-size: 1rem; line-height: 1; }
+.fchip:hover { border-color: var(--orchid); background: #ead0f5; }
+.fchip:hover i { background: var(--orchid); color: #fff; }
+.fchips__reset { padding: 6px 4px; border: 0; background: none; color: var(--muted); font-size: .85rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.fchips__reset:hover { color: var(--coral); }
+
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
 
 /* Картка */
@@ -308,7 +318,7 @@ code { font-family: var(--mono); font-size: .82em; background: var(--orchid-soft
   .sheet__head::before { content: ""; position: absolute; top: 9px; left: 50%; width: 42px; height: 4px; margin-left: -21px; border-radius: 2px; background: var(--line-strong); }
   .sheet__head strong { display: flex; align-items: center; gap: 8px; font-weight: 800; }
   .sheet__close { position: static; width: 40px; height: 40px; }
-  .sheet__foot { position: sticky; bottom: 0; grid-template-columns: 1fr 1.4fr; background: var(--surface); padding: 12px 0 calc(14px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); margin-top: 4px; }
+  .sheet__foot { position: sticky; bottom: 0; grid-template-columns: 1fr; background: var(--surface); padding: 12px 0 calc(14px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); margin-top: 4px; }
   .sheet__foot .btn { min-height: 48px; padding-inline: 10px; white-space: normal; }
   .sheet__apply { display: inline-flex; }
   .filters__more .field select { min-height: 46px; }
@@ -357,6 +367,9 @@ code { font-family: var(--mono); font-size: .82em; background: var(--orchid-soft
   .filters__open { padding-inline: 12px; }
   .btn--small { min-height: 40px; padding-inline: 14px; }
   .pager button { min-width: 44px; min-height: 44px; }
+  .fchip { min-height: 40px; padding: 6px 10px 6px 14px; }
+  .fchip i { width: 24px; height: 24px; }
+  .fchips__reset { min-height: 40px; }
   .chips button { min-height: 44px; }
   .search .btn { min-height: 44px; }
   .hero--small h1 { font-size: 2rem; }

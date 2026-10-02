@@ -336,6 +336,23 @@
     $('cats').innerHTML = html;
   }
 
+  // Плашки вибраних фільтрів над картками: кожну можна зняти окремо або скинути все разом
+  function renderChips(st) {
+    var chips = [];
+    if (st.q) chips.push(['q', 'Пошук: ' + st.q]);
+    if (st.cat) chips.push(['cat', st.cat]);
+    if (st.dr) chips.push(['dr', 'DR від ' + st.dr]);
+    if (st.days) chips.push(['days', st.days === '365' ? 'За рік' : 'За ' + st.days + ' ' + plural(+st.days, 'день', 'дні', 'днів')]);
+    if (st.tld) chips.push(['tld', 'Зона .' + st.tld]);
+    if (!st.strict) chips.push(['strict', 'Усі сайти ніші AI']);
+    var box = $('fchips');
+    box.hidden = !chips.length;
+    box.innerHTML = chips.map(function (c) {
+      return '<button type="button" class="fchip" data-clear="' + c[0] + '" aria-label="Зняти фільтр: ' + esc(c[1]) + '">' +
+        '<span>' + esc(c[1]) + '</span><i aria-hidden="true">×</i></button>';
+    }).join('') + (chips.length ? '<button type="button" class="fchips__reset" data-clear="all">Скинути фільтри</button>' : '');
+  }
+
   function syncCatalogControls(st) {
     if (document.activeElement !== $('fq')) $('fq').value = st.q;
     $('fSort').value = st.sort;
@@ -351,6 +368,7 @@
     renderCats(st);
     var n = (st.cat ? 1 : 0) + (st.dr ? 1 : 0) + (st.days ? 1 : 0) + (st.tld ? 1 : 0) + (st.strict ? 0 : 1);
     document.querySelectorAll('.js-fcount').forEach(function (b) { b.textContent = n; b.hidden = !n; });
+    renderChips(st);
   }
 
   async function renderCatalog(q) {
@@ -671,7 +689,15 @@
     $('fDays').addEventListener('change', function () { updateCatalog({ days: this.value }); });
     $('fTld').addEventListener('change', function () { updateCatalog({ tld: this.value }); });
     $('fStrict').addEventListener('change', function () { updateCatalog({ strict: this.checked }); });
-    $('resetBtn').addEventListener('click', function () { $('fq').value = ''; navigate('catalog', {}); });
+    $('fchips').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-clear]');
+      if (!b) return;
+      var k = b.getAttribute('data-clear');
+      if (k === 'all') { $('fq').value = ''; navigate('catalog', {}); return; }
+      if (k === 'q') $('fq').value = '';
+      var patch = { q: { q: '' }, cat: { cat: '' }, dr: { dr: 0 }, days: { days: '' }, tld: { tld: '' }, strict: { strict: true } }[k];
+      if (patch) updateCatalog(patch);
+    });
 
     $('cats').addEventListener('click', function (e) {
       var b = e.target.closest('[data-cat]');
