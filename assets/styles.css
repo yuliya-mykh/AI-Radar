@@ -171,6 +171,11 @@ button, input, select { font: inherit; color: inherit; }
 .card__foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
 .card__foot .muted { font: 500 .72rem var(--mono); white-space: nowrap; }
 .ava { flex: none; width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; font-weight: 800; color: #fff; background: linear-gradient(135deg, hsl(var(--h) 62% 66%), hsl(calc(var(--h) + 45) 55% 50%)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 8px 16px -8px hsl(var(--h) 60% 50%); text-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
+.ava { position: relative; overflow: hidden; }
+.ava__img { position: absolute; inset: 0; margin: auto; width: 62%; height: 62%; object-fit: contain; opacity: 0; border-radius: 4px; }
+.ava--icon { background: #fff; border: 1px solid var(--line); box-shadow: 0 6px 14px -8px rgba(88, 40, 84, .35); }
+.ava--icon > span { visibility: hidden; }
+.ava--icon .ava__img { opacity: 1; }
 .ava--lg { width: 56px; height: 56px; font-size: 1.35rem; border-radius: 16px; }
 .dr { flex: none; font: 600 .72rem var(--mono); padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
 .dr--high { color: var(--good); background: var(--good-bg); }

@@ -234,6 +234,28 @@
   var known = new Map(); // domain -> site, щоб відкривати картку без повторного запиту
   function remember(list) { list.forEach(function (s) { known.set(s.domain, s); }); }
 
+  // ---------- Іконка сайту ----------
+  // API не віддає логотипів, тому беремо фавікон із сервісу Google за доменом.
+  // Поки картинка не завантажилась (або якщо її немає) — показуємо кольорову літеру.
+  var ICON_URL = 'https://www.google.com/s2/favicons?sz=64&domain=';
+  function avaHtml(site, large) {
+    return '<div class="ava' + (large ? ' ava--lg' : '') + '" style="--h:' + hue(site.domain) + '" aria-hidden="true">' +
+      '<span>' + esc(site.domain.charAt(0).toUpperCase()) + '</span>' +
+      '<img class="ava__img" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="64" height="64" src="' +
+      ICON_URL + encodeURIComponent(site.domain) + '"></div>';
+  }
+  // load/error не спливають, тому ловимо їх на фазі перехоплення
+  document.addEventListener('load', function (e) {
+    var img = e.target;
+    if (!img.classList || !img.classList.contains('ava__img')) return;
+    // якщо іконки немає, сервіс віддає типову заглушку 16×16 — тоді лишаємо літеру
+    if (img.naturalWidth > 16) img.parentNode.classList.add('ava--icon'); else img.remove();
+  }, true);
+  document.addEventListener('error', function (e) {
+    var img = e.target;
+    if (img.classList && img.classList.contains('ava__img')) img.remove();
+  }, true);
+
   // ---------- Картка сайту ----------
   function cardHtml(site) {
     var name = siteName(site);
@@ -242,7 +264,7 @@
     }).join('');
     return '<article class="card">' +
       '<header class="card__head">' +
-        '<div class="ava" style="--h:' + hue(site.domain) + '" aria-hidden="true">' + esc(site.domain.charAt(0).toUpperCase()) + '</div>' +
+        avaHtml(site) +
         '<div class="card__id"><h3><button type="button" class="link" data-open="' + esc(site.domain) + '">' + esc(name) + '</button></h3>' +
         '<a class="card__domain" href="' + esc(safeUrl(site)) + '" target="_blank" rel="noopener noreferrer nofollow">' + esc(site.domain) + ' ↗</a></div>' +
         '<span class="dr ' + drClass(site.dr) + '" title="Domain Rating, 0–100">DR ' + (site.dr == null ? '—' : esc(site.dr)) + '</span>' +
@@ -519,8 +541,8 @@
       }).join('') + '</tr>';
     }
     var head = '<tr><td></td>' + compare.map(function (s) {
-      return '<th scope="col"><div class="cmp__head"><div class="ava" style="--h:' + hue(s.domain) + '" aria-hidden="true">' + esc(s.domain.charAt(0).toUpperCase()) + '</div>' +
-        '<div><a href="' + esc(safeUrl(s)) + '" target="_blank" rel="noopener noreferrer nofollow">' + esc(s.domain) + ' ↗</a>' +
+      return '<th scope="col"><div class="cmp__head">' + avaHtml(s) +
+        '<div><a href=""' + esc(safeUrl(s)) + '" target="_blank" rel="noopener noreferrer nofollow">' + esc(s.domain) + ' ↗</a>' +
         '<button type="button" class="link link--muted" data-rm="' + esc(s.domain) + '">Прибрати</button></div></div></th>';
     }).join('') + '</tr>';
 
@@ -564,7 +586,7 @@
     function row(k, v) { return '<div><dt>' + k + '</dt><dd>' + v + '</dd></div>'; }
     dlg.innerHTML =
       '<form method="dialog"><button class="dialog__close" aria-label="Закрити">×</button></form>' +
-      '<div class="dialog__head"><div class="ava ava--lg" style="--h:' + hue(s.domain) + '" aria-hidden="true">' + esc(s.domain.charAt(0).toUpperCase()) + '</div>' +
+      '<div class="dialog__head">' + avaHtml(s, true) +
       '<div><h2 id="detailTitle">' + esc(siteName(s)) + '</h2><p class="muted">' + esc(s.domain) + '</p></div></div>' +
       '<p>' + esc(s.ai_summary || 'Опису поки немає.') + '</p>' +
       ((s.ai_categories || []).length ? '<ul class="tags">' + s.ai_categories.map(function (c) {
