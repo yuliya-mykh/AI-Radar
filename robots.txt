@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yuliya-mykh.github.io/AI-Radar/sitemap.xml
+Sitemap: https://ai-radar-kresteldev.vercel.app/sitemap.xml

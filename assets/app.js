@@ -10,7 +10,7 @@
   // спрацює сама, щойно помилку на боці API виправлять.
   var API_DIRECT = 'https://freeserp.ai/api.php';
   // Повна адреса посередника — для копій сайту поза Vercel (GitHub Pages, локальний запуск).
-  var API_PROXY = '';
+  var API_PROXY = 'https://ai-radar-kresteldev.vercel.app/api/freeserp';
   var ENDPOINTS = (function () {
     var list = [];
     if (/\.vercel\.app$/.test(location.hostname)) list.push(new URL('api/freeserp', location.origin + '/').toString());

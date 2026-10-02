@@ -2,7 +2,8 @@
 
 Статичний вебпроєкт на публічному API [freeserp.ai](https://freeserp.ai/docs.php) (`index=sites`, `category=ai`, без ключа й реєстрації). Єдина серверна частина — маленька функція-посередник на Vercel (`api/freeserp.js`), яка пересилає запити до API.
 
-**Демо:** https://yuliya-mykh.github.io/AI-Radar/
+**Демо:** https://ai-radar-kresteldev.vercel.app/  
+**Копія на GitHub Pages:** https://yuliya-mykh.github.io/AI-Radar/
 
 ## Знайдена проблема в API
 
@@ -34,9 +35,9 @@ API не можна викликати з браузера напряму: се�
 
 Зроблено базове: `title` і опис (свій для кожного розділу), `canonical`, Open Graph і Twitter-розмітка з картинкою `assets/og.jpg`, JSON-LD (`WebSite`), `robots.txt`, `sitemap.xml`, семантична розмітка.
 
-Адреса сайту в цих тегах і файлах — `https://yuliya-mykh.github.io/AI-Radar/`; якщо сайт переїде, її треба замінити в `index.html`, `robots.txt` і `sitemap.xml`.
+Адреса сайту в цих тегах і файлах — `https://ai-radar-kresteldev.vercel.app/`; якщо сайт переїде, її треба замінити в `index.html`, `robots.txt` і `sitemap.xml`.
 
-Обмеження: розділи відкриваються через `#/…`, а картки підвантажуються з API в браузері, тому для пошуковика це одна сторінка без каталогу в HTML. Сайт лежить у підтеці домену, тому `robots.txt` пошуковики не читають — він спрацює лише на власному домені.
+Обмеження: розділи відкриваються через `#/…`, а картки підвантажуються з API в браузері, тому для пошуковика це одна сторінка без каталогу в HTML.
 
 ## Як запустити
 
