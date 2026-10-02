@@ -4,7 +4,21 @@
   'use strict';
 
   // ---------- Налаштування ----------
-  var API = 'https://freeserp.ai/api.php';
+  // Пряма адреса API. Зараз браузери її блокують: сервер freeserp.ai віддає
+  // заголовок Access-Control-Allow-Origin двічі («*, *»). Тому запити йдуть через
+  // посередника (api/freeserp.js на Vercel), а пряма адреса лишається запасною —
+  // спрацює сама, щойно помилку на боці API виправлять.
+  var API_DIRECT = 'https://freeserp.ai/api.php';
+  // Повна адреса посередника — для копій сайту поза Vercel (GitHub Pages, локальний запуск).
+  var API_PROXY = '';
+  var ENDPOINTS = (function () {
+    var list = [];
+    if (/\.vercel\.app$/.test(location.hostname)) list.push(new URL('api/freeserp', location.origin + '/').toString());
+    if (API_PROXY) list.push(API_PROXY);
+    list.push(API_DIRECT);
+    return list.filter(function (v, i, a) { return a.indexOf(v) === i; });
+  })();
+  var endpointIdx = 0; // який із ENDPOINTS спрацював останнім
   var PAGE_SIZE = 24;
   var NEW_SIZE = 48;
   var MAX_WINDOW = 10000; // обмеження API: from + size <= 10000
@@ -116,29 +130,37 @@
 
   /** GET до API з кешем у памʼяті та повторами при 502/мережевих збоях. */
   async function api(params, signal) {
-    var url = new URL(API);
+    var qs = new URLSearchParams();
     Object.keys(params).forEach(function (k) {
       var v = params[k];
       if (v === '' || v == null || v === false) return;
-      url.searchParams.append(k, v === true ? '1' : v);
+      qs.append(k, v === true ? '1' : v);
     });
-    var key = url.toString();
+    var key = qs.toString();
     if (cache.has(key)) return cache.get(key);
 
     var lastErr;
-    for (var attempt = 0; attempt < 3; attempt++) {
-      if (attempt) await sleep(500 * Math.pow(2, attempt), signal);
-      try {
-        var res = await fetch(key, { signal: signal, headers: { Accept: 'application/json' } });
-        if (res.status === 502 || res.status === 503 || res.status === 429) { lastErr = new Error('Сервіс тимчасово недоступний (' + res.status + ')'); continue; }
-        var data = await res.json();
-        if (!res.ok || data.ok === false) throw new Error(data.detail || data.error || ('Помилка ' + res.status));
-        cache.set(key, data);
-        return data;
-      } catch (e) {
-        if (e.name === 'AbortError') throw e;
-        lastErr = e;
-        if (!(e instanceof TypeError)) break; // TypeError = мережа/CORS, варто повторити
+    // Перебираємо адреси, починаючи з тієї, що спрацювала минулого разу.
+    for (var n = 0; n < ENDPOINTS.length; n++) {
+      var idx = (endpointIdx + n) % ENDPOINTS.length;
+      var url = ENDPOINTS[idx] + '?' + key;
+      for (var attempt = 0; attempt < 3; attempt++) {
+        if (attempt) await sleep(500 * Math.pow(2, attempt), signal);
+        try {
+          var res = await fetch(url, { signal: signal });
+          if (res.status === 502 || res.status === 503 || res.status === 429) { lastErr = new Error('Сервіс тимчасово недоступний (' + res.status + ')'); continue; }
+          var data = await res.json();
+          if (!res.ok || data.ok === false) throw new Error(data.detail || data.error || ('Помилка ' + res.status));
+          endpointIdx = idx;
+          cache.set(key, data);
+          return data;
+        } catch (e) {
+          if (e.name === 'AbortError') throw e;
+          lastErr = e instanceof TypeError
+            ? new Error('Браузер не зміг отримати дані з API (мережа або блокування CORS)')
+            : e;
+          break; // мережа/CORS або помилка у відповіді — пробуємо наступну адресу
+        }
       }
     }
     throw lastErr || new Error('Невідома помилка');
