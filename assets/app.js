@@ -13,7 +13,11 @@
   var API_PROXY = 'https://ai-radar-kresteldev.vercel.app/api/freeserp';
   var ENDPOINTS = (function () {
     var list = [];
-    if (/\.vercel\.app$/.test(location.hostname)) list.push(new URL('api/freeserp', location.origin + '/').toString());
+    var host = location.hostname;
+    var base = new URL('.', location.href).toString(); // тека, з якої відкрито сайт
+    if (/\.vercel\.app$/.test(host)) list.push(base + 'api/freeserp');
+    // на хостингу з PHP (не Vercel, не GitHub Pages, не локальний запуск) — власний посередник поруч із сайтом
+    else if (host && !/\.github\.io$/.test(host) && host !== 'localhost' && host !== '127.0.0.1') list.push(base + 'api/freeserp.php');
     if (API_PROXY) list.push(API_PROXY);
     list.push(API_DIRECT);
     return list.filter(function (v, i, a) { return a.indexOf(v) === i; });
