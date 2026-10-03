@@ -58,7 +58,7 @@ npx vercel dev   # → http://localhost:3000
 ```
 index.html          розмітка чотирьох екранів
 api/freeserp.js     функція-посередник до API (Vercel)
-api/freeserp.php    той самий посередник для хостингу з PHP
+php/freeserp.php    той самий посередник для хостингу з PHP
 assets/app.js       логіка: API-клієнт, маршрути, рендер
 assets/styles.css   стилі, адаптив
 assets/hero*.jpg    зображення банерів сторінок
